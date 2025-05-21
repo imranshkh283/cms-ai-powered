@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ArticleController;
 
 // Public routes of authtication
 Route::post('/login', [AuthController::class, 'index'])->name('login');
@@ -13,6 +14,10 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::post('/categories/create', [CategoryController::class, 'create']);
     Route::patch('/categories/{id}', [CategoryController::class, 'update']);
     Route::delete('/categories/{id}', [CategoryController::class, 'delete']);
+
+
+    Route::post('/articles/create', [ArticleController::class, 'create']);
+    Route::patch('/articles/{id}', [ArticleController::class, 'update']);
 });
 
 // Protected routes of product and logout

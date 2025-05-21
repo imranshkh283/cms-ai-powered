@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug')->unique(); // Auto-generated
+            $table->string('slug')->nullable(); // Auto-generated
             $table->text('content');
             $table->text('summary')->nullable(); // Auto-generated (nullable initially)
             $table->enum('status', ['Draft', 'Published', 'Archived'])->default('Draft');
