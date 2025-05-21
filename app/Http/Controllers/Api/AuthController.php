@@ -14,15 +14,6 @@ class AuthController extends Controller
 
     public function index(LoginRequest $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'email' => 'required|string|email',
-        //     'password' => 'required|string'
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return $this->validationError($validator->errors());
-        // }
-
         try {
             $credentials = $request->only(['email', 'password']);
             if (Auth::attempt($credentials)) {
@@ -35,6 +26,17 @@ class AuthController extends Controller
             } else {
                 return $this->error('', 'Invalid Credentials');
             }
+        } catch (\Throwable $e) {
+            return $this->internalError($e->getMessage());
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        try {
+            Auth::user()->currentAccessToken()->delete();
+
+            return $this->success('', 'Logout success');
         } catch (\Throwable $e) {
             return $this->internalError($e->getMessage());
         }
