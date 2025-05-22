@@ -6,6 +6,8 @@ use App\Repositories\ArticleRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
 
+use App\Jobs\GenerateArticleSlugSummaryJob;
+
 class ArticleService
 {
     protected ArticleRepository $articleRepository;
@@ -26,6 +28,9 @@ class ArticleService
         if (!empty($data['categories'])) {
             $this->articleRepository->attachCategories($article, $data['categories']);
         }
+
+        // Dispatch LLM job
+        GenerateArticleSlugSummaryJob::dispatch($article->id);
 
         return $article;
     }
