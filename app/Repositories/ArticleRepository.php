@@ -3,14 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Article;
+use App\Filters\Articles\ArticleFilterPipeline;
 
 class ArticleRepository
 {
-
-    public function getAllArticle()
-    {
-        return Article::all();
-    }
 
     public function create(array $data): Article
     {

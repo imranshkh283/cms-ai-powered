@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+
 use App\Repositories\ArticleRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
@@ -15,11 +16,6 @@ class ArticleService
     public function __construct(ArticleRepository $articleRepository)
     {
         $this->articleRepository = $articleRepository;
-    }
-
-    public function index()
-    {
-        return $this->articleRepository->getAllArticle();
     }
 
     public function create(array $data)

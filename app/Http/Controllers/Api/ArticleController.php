@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\ArticleRequest;
-use App\Http\Traits\HttpResponse;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Filters\Articles\ArticleFilter;
 use App\Http\Resources\ArticleResource;
+use App\Http\Requests\ArticleRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Traits\HttpResponse;
 use App\Services\ArticleService;
-
+use Illuminate\Http\Request;
+use App\Models\Article;
 
 class ArticleController extends Controller
 {
@@ -22,10 +24,20 @@ class ArticleController extends Controller
         $this->articleService = $articleService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $articles = $this->articleService->index();
-        return $this->success(ArticleResource::collection($articles), 'Articles retrieved successfully');
+
+        $query = Article::with(['categories', 'author']);
+
+        $filteredQuery = (new ArticleFilter($query, $request))->apply();
+
+        $articles = $filteredQuery->latest()->paginate(10);
+
+        if (collect($articles)->isNotEmpty()) {
+            return $this->success('No data');
+        } else {
+            return $this->success(ArticleResource::collection($articles), 'Articles retrieved successfully');
+        }
     }
 
     /**
