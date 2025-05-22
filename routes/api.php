@@ -15,7 +15,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::patch('/categories/{id}', [CategoryController::class, 'update']);
     Route::delete('/categories/{id}', [CategoryController::class, 'delete']);
 
-
+    Route::get('/articles', [ArticleController::class, 'index']);
     Route::post('/articles/create', [ArticleController::class, 'create']);
     Route::patch('/articles/{id}', [ArticleController::class, 'update']);
 });

@@ -17,6 +17,11 @@ class ArticleService
         $this->articleRepository = $articleRepository;
     }
 
+    public function index()
+    {
+        return $this->articleRepository->getAllArticle();
+    }
+
     public function create(array $data)
     {
         $article = $this->articleRepository->create([

@@ -22,6 +22,11 @@ class ArticleController extends Controller
         $this->articleService = $articleService;
     }
 
+    public function index()
+    {
+        $articles = $this->articleService->index();
+        return $this->success(ArticleResource::collection($articles), 'Articles retrieved successfully');
+    }
 
     /**
      * Show the form for creating a new resource.

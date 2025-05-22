@@ -6,6 +6,12 @@ use App\Models\Article;
 
 class ArticleRepository
 {
+
+    public function getAllArticle()
+    {
+        return Article::all();
+    }
+
     public function create(array $data): Article
     {
         return Article::create($data);
