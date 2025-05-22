@@ -30,4 +30,11 @@ class Article extends Model
     {
         return $this->belongsTo(User::class, 'author_id');
     }
+
+    protected static function booted()
+    {
+        static::deleting(function ($article) {
+            $article->categories()->detach();
+        });
+    }
 }

@@ -58,4 +58,21 @@ class ArticleController extends Controller
 
         return $this->success(new ArticleResource($updatedArticle), 'Article updated successfully');
     }
+
+    public function delete(int $id)
+    {
+        $article = $this->articleService->findById($id);
+
+        if (!$article) {
+            return $this->notFound('Article not found');
+        }
+
+        try {
+            $this->articleService->delete($article);
+
+            return $this->success(null, 'Article deleted successfully');
+        } catch (\Throwable $e) {
+            return $this->internalError($e->getMessage());
+        }
+    }
 }

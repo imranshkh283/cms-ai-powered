@@ -18,6 +18,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::post('/articles/create', [ArticleController::class, 'create']);
     Route::patch('/articles/{id}', [ArticleController::class, 'update']);
+    Route::delete('/articles/{id}', [ArticleController::class, 'delete']);
 });
 
 // Protected routes of product and logout

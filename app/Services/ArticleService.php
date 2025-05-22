@@ -60,4 +60,9 @@ class ArticleService
     {
         return $this->articleRepository->findById($id);
     }
+
+    public function delete(Article $article): void
+    {
+        $this->articleRepository->delete($article);
+    }
 }

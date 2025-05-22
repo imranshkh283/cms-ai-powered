@@ -32,4 +32,9 @@ class ArticleRepository
     {
         return Article::find($id);
     }
+
+    public function delete(Article $article): void
+    {
+        $article->delete();
+    }
 }
