@@ -39,13 +39,15 @@ class GenerateArticleSlugSummaryJob implements ShouldQueue
         try {
             logger('Article Title: ' . $article->title . ', Content: ' . $article->content);
             $generated = $llm->generateSlugAndSummary($article->title, $article->content);
-            $this->data = $generated;
-            logger('Protected : ' . json_encode($this->data));
+            $this->data = json_decode($generated, true);
             logger('Object 1: ' . $generated);
-            $article->update([
-                'slug' => $this->data['slug'] ?? \Str::slug($article->title),
-                'summary' => $this->data['summary'] ?? null,
-            ]);
+            logger('Before update: ' . json_encode($this->data));
+
+            $article->slug = $this->data['slug'];
+            $article->summary = $this->data['summary'];
+            $success = $article->save();
+
+            logger('Save success status: ' . json_encode($success));
         } catch (\Throwable $e) {
             return $this->internalError($e->getMessage());
         }
