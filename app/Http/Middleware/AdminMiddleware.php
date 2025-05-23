@@ -16,6 +16,6 @@ class AdminMiddleware
             return $next($request);
         }
 
-        return $this->unauthorizedAdmin();
+        abort(403);
     }
 }
