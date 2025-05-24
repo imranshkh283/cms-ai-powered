@@ -92,6 +92,10 @@ php artisan key:generate
 php artisan migrate
 php artisan db:seed
 php artisan serve
+QUEUE_CONNECTION=sync to QUEUE_CONNECTION=database **( for runs process asynchronously ).
+
+php artisan work:queue
+
 ```
 
 For postman environments...
