@@ -26,6 +26,7 @@ This project is a Content Management System (CMS) API built using Laravel and My
 - Go to the **API Keys** section
 - Click **"Create new key"** or **"Generate API Key"**
 - **Copy** and **store your API key** securely
+- Paste in .env file on OPEN_ROUTER_SECRET=API_KEY  
 
 > ⚠️ Never share your API key publicly
 
