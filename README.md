@@ -1,66 +1,121 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Build a Simple CMS Application API with AI-Powered Features
+## _Develop a CMS API using PHP (Laravel) and MySQL_
+This project is a Content Management System (CMS) API built using Laravel and MySQL, enhanced with AI-powered features such as automated slug generation and article summarization. The application provides robust user authentication, role-based access control, and comprehensive content management capabilities.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 🔑 Getting Started with OpenRoute - LLM Integration
 
-## About Laravel
+### 🧠 OpenRoute LLM Integration Guide
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**OpenRoute** is a free API integration platform for accessing powerful LLMs, such as `deepseek/deepseek-r1:free`. Follow the steps below to get your API key and start using the model.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 Getting Started
 
-## Learning Laravel
+### 1. Sign In
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Go to [OpenRoute](https://openrouter.ai)
+- Click on **"Sign In"** in the top-right corner
+- Log in using your **email address**, **Google**, or **GitHub** account
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Get Your API Key
 
-## Laravel Sponsors
+- Once logged in, open your **Dashboard**
+- Go to the **API Keys** section
+- Click **"Create new key"** or **"Generate API Key"**
+- **Copy** and **store your API key** securely
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+> ⚠️ Never share your API key publicly
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### 3. Select the Model
 
-## Contributing
+- Navigate to the [Models Page](https://openrouter.ai/models)
+- Search for `deepseek/deepseek-r1:free`
+- Click on the model name to open its page
+- If prompted, click **"Accept Terms"** to enable access
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+### 4. Start Using the API
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+You’re now ready to integrate the model with your application! Use your API key and selected model to make requests via OpenRoute.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 📘 Example
+
+Here's a basic curl example using the OpenRoute API:
+
+```bash
+curl https://openrouter.ai/api/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "deepseek/deepseek-r1:free",
+    "messages": [{"role": "user", "content": "Hello, how are you?"}]
+  }'
+
+
+
+## Features
+
+- User Authentication
+- Login API
+- Seeder for Admin and Author Users (Predefined users for Admin and Author roles via database seeders)
+- Content Management
+- CRUD for Articles
+- AI-Powered Features
+- **Slug Generation** ( Automatically generate a unique slug using an LLM based on the title and content. This process runs asynchronously. )
+- **Article Summary** ( Automatically create a 2–3 sentence summary using an LLM. Also asynchronously generated.)
+- Category Management **(Admin Only)**
+- Article Listing & Filtering **(Admin Only)**
+- /articles?category_id=1&status=Published&start_date=2025-01-01&end_date=2025-05-20
+- **Role-Based Access Control** 
+- **Admin** (Manage all articles and categories.)
+- **Author** (Manage only their own articles.)
+
+## Installation
+
+CMS requires [Laravel 10](https://laravel.com/docs/10.x/installation) 10.x to run.
+Sign in to [OpenRoute](https://openrouter.ai/) for using LLM and generate token.
+
+```sh
+cd cms-api-powered
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan db:seed
+php artisan serve
+```
+
+For postman environments...
+
+```sh
+base_url = http://127.0.0.1:8000/api
+token=Bearer 1|xrbrABEtxm1mMyMf1YM6P0hQpocrs5bsy1jJZAixc482ff18
+```
+
+## Plugins
+
+Dillinger is currently extended with the following plugins.
+Instructions on how to use them in your own application are linked below.
+
+| Plugin | README |
+| ------ | ------ |
+| OpenRoute | [https://openrouter.ai/] |
+
+Verify the deployment by navigating to your server address in
+your preferred browser.
+
+```sh
+127.0.0.1:8000/api
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT
