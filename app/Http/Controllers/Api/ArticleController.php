@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\UpdateArticleRequest;
+use App\Http\Requests\UpdateStatusRequest;
 use App\Filters\Articles\ArticleFilter;
 use App\Http\Resources\ArticleResource;
 use App\Http\Requests\ArticleRequest;
@@ -33,11 +34,11 @@ class ArticleController extends Controller
 
         $articles = $filteredQuery->latest()->paginate(10);
 
-        if (collect($articles)->isNotEmpty()) {
+        if ($articles->isEmpty()) {
             return $this->success('No data');
-        } else {
-            return $this->success(ArticleResource::collection($articles), 'Articles retrieved successfully');
         }
+
+        return $this->success(ArticleResource::collection($articles), 'Articles retrieved successfully');
     }
 
     /**
@@ -66,6 +67,8 @@ class ArticleController extends Controller
             return $this->notFound('Article not found');
         }
 
+        $this->authorize('update', $article);
+
         $updatedArticle = $articleService->update($article, $data)->load('categories');
 
         return $this->success(new ArticleResource($updatedArticle), 'Article updated successfully');
@@ -79,6 +82,8 @@ class ArticleController extends Controller
             return $this->notFound('Article not found');
         }
 
+        $this->authorize('delete', $article);
+
         try {
             $this->articleService->delete($article);
 
@@ -86,5 +91,18 @@ class ArticleController extends Controller
         } catch (\Throwable $e) {
             return $this->internalError($e->getMessage());
         }
+    }
+
+    public function statusChange(UpdateStatusRequest $request)
+    {
+        $article = $this->articleService->findById($request->id);
+
+        if (!$article) {
+            return $this->notFound('Article not found');
+        }
+
+        $this->articleService->updateStatus($article->id, $request->status, $request->published_at);
+
+        return $this->success(null, 'Article Published successfully');
     }
 }

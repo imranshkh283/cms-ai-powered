@@ -21,6 +21,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::post('/articles/create', [ArticleController::class, 'create']);
     Route::patch('/articles/{id}', [ArticleController::class, 'update']);
+    Route::post('/articles/published', [ArticleController::class, 'statusChange']);
     Route::delete('/articles/{id}', [ArticleController::class, 'delete']);
 });
 

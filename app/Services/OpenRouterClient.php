@@ -13,9 +13,8 @@ class OpenRouterClient
     {
         $this->messages[] = [
             'role' => 'user',
-            'content' => "Generate a JSON object with two fields: a unique, URL-safe slug (max 60 characters), and a short summary (max 200 characters) for the given article title and content. Respond with only the JSON object and no extra text or formatting. Example: {\"slug\": \"generated-slug\", \"summary\": \"generated-summary\"}",
+            'content' => "Generate a JSON object with two fields: a unique, URL-safe slug (max 60 characters), and a short summary (max 200 characters) for the given title: \"$title\" and content: \"$content\". Respond with only the JSON object and no extra text or formatting. Example: {\"slug\": \"generated-slug\", \"summary\": \"generated-summary\"}",
         ];
-
 
         $response = Http::withOptions([
             'verify' => storage_path('certs/cacert.pem'),

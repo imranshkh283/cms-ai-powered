@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\ArticleStatus;
+use \App\Models\Category;
 
 class Article extends Model
 {
@@ -21,9 +23,13 @@ class Article extends Model
         'author_id',
     ];
 
+    protected $casts = [
+        'status' => \App\Enums\ArticleStatus::class,
+    ];
+
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'article_category');
     }
 
     public function author()

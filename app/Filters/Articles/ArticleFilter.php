@@ -20,19 +20,19 @@ class ArticleFilter
     {
         return $this->query
             ->when($this->request->filled('category_id'), function ($q) {
-                $q->whereHas('categories', function ($q2) {
-                    // $q2->whereIn('categories.id', $this->request->category_id); // TODO: fix this
-                    $q2->where('categories.id', $this->request->category_id);
+                $categoryId = $this->request->input('category_id');
+                $q->whereHas('categories', function ($q2) use ($categoryId) {
+                    $q2->where('categories.id', $categoryId);
                 });
             })
             ->when($this->request->filled('status'), function ($q) {
-                $q->where('status', $this->request->status);
+                $status = $this->request->input('status');
+                $q->where('status', $status);
             })
             ->when($this->request->filled('start_date') && $this->request->filled('end_date'), function ($q) {
-                $q->whereBetween('published_at', [
-                    $this->request->start_date,
-                    $this->request->end_date
-                ]);
+                $startDate = $this->request->input('start_date');
+                $endDate = $this->request->input('end_date');
+                $q->whereBetween('published_at', [$startDate, $endDate]);
             });
     }
 }

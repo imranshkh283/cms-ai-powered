@@ -24,7 +24,7 @@ class ArticleRepository
         return $article;
     }
 
-    public function findById(int $id): Article
+    public function findById(int $id): Article | null
     {
         return Article::find($id);
     }
@@ -32,5 +32,11 @@ class ArticleRepository
     public function delete(Article $article): void
     {
         $article->delete();
+    }
+
+    public function updateStatus(Article $article, array $data): Article
+    {
+        $article->update($data);
+        return $article;
     }
 }

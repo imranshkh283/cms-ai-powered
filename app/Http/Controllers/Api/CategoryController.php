@@ -18,6 +18,9 @@ class CategoryController extends Controller
     {
         try {
             $categories = Category::all();
+            if ($categories->isEmpty()) {
+                return $this->error('No categories found', 404);
+            }
             return $this->success($categories, 'Categories data successfully');
         } catch (\Throwable $e) {
             return $this->internalError($e->getMessage());

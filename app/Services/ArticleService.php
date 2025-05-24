@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Repositories\ArticleRepository;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\ArticleStatus;
 use App\Models\Article;
 
 use App\Jobs\GenerateArticleSlugSummaryJob;
@@ -52,7 +53,7 @@ class ArticleService
         return $article;
     }
 
-    public function findById(int $id): Article
+    public function findById(int $id): Article | null
     {
         return $this->articleRepository->findById($id);
     }
@@ -60,5 +61,15 @@ class ArticleService
     public function delete(Article $article): void
     {
         $this->articleRepository->delete($article);
+    }
+
+    public function updateStatus(int $id, string $status, ?string $publishedAt): void
+    {
+        $article = $this->articleRepository->findById($id);
+
+        $this->articleRepository->updateStatus($article, [
+            'status'       => $status,
+            'published_at' => $status === ArticleStatus::Published->value ? $publishedAt : null,
+        ]);
     }
 }
