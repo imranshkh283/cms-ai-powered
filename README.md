@@ -57,8 +57,8 @@ curl https://openrouter.ai/api/v1/chat/completions \
   -d '{
     "model": "deepseek/deepseek-r1:free",
     "messages": [{"role": "user", "content": "Hello, how are you?"}]
-  }'
-
+  }
+```
 
 
 ## Features
